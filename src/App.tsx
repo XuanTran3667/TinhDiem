@@ -106,8 +106,8 @@ export default function App() {
     const encouragement = parseFloat(encouragementPoints) || 0;
     if (scores.length < 4 || isNaN(gpa3)) return null;
     const totalExams = scores.reduce((sum, val) => sum + val, 0);
-    const avgExams = totalExams / 4;
-    const result = (avgExams * 0.5) + (gpa3 * 0.5) + priority + encouragement;
+    const avgExamsWithKK = (totalExams + encouragement) / 4;
+    const result = (avgExamsWithKK + gpa3) / 2 + priority;
     const hasLiệt = scores.some(s => s <= 1.0);
     const isPass = result >= 5.0 && !hasLiệt;
     return { score: result.toFixed(2), isPass, hasLiệt };
@@ -630,7 +630,7 @@ export default function App() {
                           <Save className="w-4 h-4" /> Lưu kết quả xét tuyển
                         </button>
                         <p className="text-slate-500 text-[10px] leading-relaxed">
-                          Công thức 2026: (Tổng 4 môn / 4 × 0.5) + (ĐTB 3 năm × 0.5) + Ưu tiên + Khuyến khích
+                          Công thức: [((Tổng 4 môn + Tổng KK) / 4) + ĐTB 3 năm] / 2 + Điểm UT
                         </p>
                       </div>
                     </div>
@@ -647,7 +647,7 @@ export default function App() {
           <div className="flex flex-wrap justify-center gap-6 mb-6">
             <div className="flex items-center gap-2 text-slate-400 text-xs font-medium">
               <div className="w-1.5 h-1.5 bg-slate-400 rounded-full" />
-              Mô hình 50/50 (Thi/Học bạ)
+              Công thức mới (Thi + KK + Học bạ)
             </div>
             <div className="flex items-center gap-2 text-slate-400 text-xs font-medium">
               <div className="w-1.5 h-1.5 bg-slate-400 rounded-full" />
@@ -659,7 +659,7 @@ export default function App() {
             </div>
           </div>
           <p className="text-slate-400 text-[10px] uppercase tracking-widest font-bold">
-            Thiết kế bởi Xuân Trường @ 2026
+            Thiết kế bởi Senior Web Developer &copy; 2026
           </p>
         </footer>
       </main>

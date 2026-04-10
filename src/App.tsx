@@ -239,20 +239,8 @@ export default function App() {
   );
 
   return (
-    <div className="relative min-h-screen bg-transparent text-[#1E293B] font-sans selection:bg-indigo-100">
-    <video
-    autoPlay
-    muted
-    loop
-    playsInline
-    className="fixed top-0 left-0 w-full h-full object-cover -z-10"
-  >
-    <source src="/bg.mp4/" type="video/mp4" />
-  </video>
-
-  {/* Lớp phủ để làm mờ nền, giúp bảng tính điểm hiện rõ hơn */}
-  <div className="fixed top-0 left-0 w-full h-full bg-white/40 dark:bg-black/40 -z-10"></div>
-      {/* Header */}
+    <div className="relative min-h-screen bg-[#F8FAFC]/20 text-[#1E293B] font-sans selection:bg-indigo-100">
+          {/* Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">

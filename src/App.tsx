@@ -697,7 +697,7 @@ export default function App() {
             </div>
           </div>
           <p className="text-slate-400 text-[10px] uppercase tracking-widest font-bold">
-            Thiết kế bởi Senior Web Developer &copy; 2026
+            Thiết kế bởi Xuân Trường @ 2026
           </p>
         </footer>
       </main>

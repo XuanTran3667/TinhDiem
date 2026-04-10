@@ -239,7 +239,7 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#1E293B] font-sans selection:bg-indigo-100">
+    <div className="min-h-screen text-[#1E293B] font-sans selection:bg-indigo-100">
       <video
     autoPlay
     muted
@@ -247,7 +247,7 @@ export default function App() {
     playsInline
     className="fixed top-0 left-0 w-full h-full object-cover -z-10"
   >
-    <source src="/bg.mp4" type="video/mp4" />
+    <source src="/bg.mp4/" type="video/mp4" />
   </video>
 
   {/* Lớp phủ để làm mờ nền, giúp bảng tính điểm hiện rõ hơn */}

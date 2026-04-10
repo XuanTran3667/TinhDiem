@@ -239,8 +239,7 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen text-[#1E293B] font-sans selection:bg-indigo-100">
-      <video
+    <video
     autoPlay
     muted
     loop

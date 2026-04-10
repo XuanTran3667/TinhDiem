@@ -119,6 +119,25 @@ export default function App() {
     return (scores.reduce((sum, val) => sum + val, 0) / 8).toFixed(2);
   }, [subjectScores]);
 
+  const requiredExamAvg = useMemo(() => {
+    const gpa3 = parseFloat(manualGpa3 || gpa3Result || '0');
+    const priority = parseFloat(priorityPoints) || 0;
+    const encouragement = parseFloat(encouragementPoints) || 0;
+
+    if (!gpa3 || isNaN(gpa3)) return null;
+
+    // Formula: ĐXTN = [((S/4 + KK/4) + GPA3) / 2] + UT
+    // To get ĐXTN = 5.0:
+    // 5.0 = [ (Avg + KK/4) + GPA3 ] / 2 + UT
+    // 10.0 = Avg + KK/4 + GPA3 + 2*UT
+    // Avg = 10.0 - GPA3 - 2*UT - KK/4
+    const required = 10.0 - gpa3 - (2 * priority) - (encouragement / 4);
+    
+    if (required > 10) return "Không thể đỗ";
+    if (required <= 1.0) return "1.01"; // Cần trên điểm liệt
+    return required.toFixed(2);
+  }, [manualGpa3, gpa3Result, priorityPoints, encouragementPoints]);
+
   // History Handlers
   const saveTBM = (type: 'tbm' | 'yearly', score: string) => {
     const newItem: TBMHistoryItem = {
@@ -589,6 +608,25 @@ export default function App() {
                     </div>
                   </div>
                 </div>
+
+                {requiredExamAvg && (
+                  <div className="bg-indigo-600 rounded-3xl p-6 text-white shadow-lg shadow-indigo-200 overflow-hidden relative">
+                    <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                      <div>
+                        <h3 className="text-indigo-100 text-xs font-bold uppercase tracking-widest mb-1">Mục tiêu để đỗ tốt nghiệp</h3>
+                        <p className="text-sm font-medium opacity-90">
+                          Bạn cần đạt trung bình mỗi môn thi ít nhất:
+                        </p>
+                      </div>
+                      <div className="text-center sm:text-right">
+                        <span className="text-4xl font-black">{requiredExamAvg}</span>
+                        <span className="text-indigo-200 text-sm font-bold ml-2">điểm/môn</span>
+                      </div>
+                    </div>
+                    {/* Decorative background element */}
+                    <div className="absolute -right-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-3xl" />
+                  </div>
+                )}
 
                 {dxtnResult && (
                   <div className={`rounded-3xl p-8 border-2 transition-all duration-500 ${
